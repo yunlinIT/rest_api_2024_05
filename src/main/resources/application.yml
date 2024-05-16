@@ -24,3 +24,5 @@ logging:
 custom:
   site:
     baseUrl: http://localhost
+  jwt:
+    secretKey: abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789
