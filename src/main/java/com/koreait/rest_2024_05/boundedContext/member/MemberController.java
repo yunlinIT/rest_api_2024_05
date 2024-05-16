@@ -1,11 +1,14 @@
 package com.koreait.rest_2024_05.boundedContext.member;
 
+import com.koreait.rest_2024_05.base.rsData.RsData;
 import com.koreait.rest_2024_05.member.entity.Member;
 import com.koreait.rest_2024_05.member.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,21 +31,23 @@ public class MemberController {
         private String password;
     }
 
+    @AllArgsConstructor
+    @Getter
+    public static class LoginResponse {
+        private final String accessToken;
+    }
+
     @PostMapping("/login")
-    public String login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse resp) {
+    public RsData<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse resp) {
 
         String accessToken = memberService.genAccessToken(loginRequest.getUsername(), loginRequest.getPassword());
 
-        resp.addHeader("Authentication",accessToken);
+        resp.addHeader("Authentication", accessToken);
 
-        return """
-                {
-                "resultCode" : "S-1",
-                "msg" : "액세스 토큰이 생성되었습니다.",
-                "data" : {
-                    "Access Token: "+ "%s"
-                    }
-                }
-                """.formatted(accessToken).stripIndent();
+        return RsData.of(
+                "S-1",
+                "엑세스토큰이 생성되었습니다.",
+                new LoginResponse(accessToken)
+        );
     }
 }
