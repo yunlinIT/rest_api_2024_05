@@ -2,6 +2,7 @@ package com.koreait.rest_2024_05.boundedContext.member;
 
 import com.koreait.rest_2024_05.member.entity.Member;
 import com.koreait.rest_2024_05.member.service.MemberService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -26,7 +27,9 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public Member login(@Valid @RequestBody LoginRequest loginRequest) {
+    public Member login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse resp) {
+        resp.addHeader("Authentication","JWT 토큰");
+
         return memberService.findByUsername(loginRequest.getUsername()).orElse(null);
     }
 }
