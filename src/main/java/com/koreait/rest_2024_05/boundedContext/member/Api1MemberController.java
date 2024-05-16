@@ -10,11 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequiredArgsConstructor
@@ -38,16 +36,32 @@ public class Api1MemberController {
     }
 
     @PostMapping("/login")
-    public RsData<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse resp) {
+    public RsData<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
 
         String accessToken = memberService.genAccessToken(loginRequest.getUsername(), loginRequest.getPassword());
-
-//        resp.addHeader("Authentication", accessToken);
 
         return RsData.of(
                 "S-1",
                 "엑세스토큰이 생성되었습니다.",
                 new LoginResponse(accessToken)
+        );
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public static class MeReponse {
+        private final Member member;
+    }
+
+//    consumes = ALL_VALUE -> Json 형태로 입력받기가 필수가 아니다.
+    @GetMapping(value = "/me", consumes = ALL_VALUE)
+    public RsData<MeReponse> me(){
+        Member member = memberService.findByUsername("user1").get();
+
+        return RsData.of(
+                "S-1",
+                "성공",
+                new MeReponse(member)
         );
     }
 }
