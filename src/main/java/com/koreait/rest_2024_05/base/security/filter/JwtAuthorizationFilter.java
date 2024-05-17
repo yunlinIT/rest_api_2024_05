@@ -1,8 +1,8 @@
 package com.koreait.rest_2024_05.base.security.filter;
 
 import com.koreait.rest_2024_05.base.jwt.JwtProvider;
-import com.koreait.rest_2024_05.member.entity.Member;
-import com.koreait.rest_2024_05.member.service.MemberService;
+import com.koreait.rest_2024_05.boundedContext.member.entity.Member;
+import com.koreait.rest_2024_05.boundedContext.member.service.MemberService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 

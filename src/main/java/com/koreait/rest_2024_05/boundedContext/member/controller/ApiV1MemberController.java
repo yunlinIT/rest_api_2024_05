@@ -1,11 +1,10 @@
-package com.koreait.rest_2024_05.boundedContext.member;
+package com.koreait.rest_2024_05.boundedContext.member.controller;
 
 import com.koreait.rest_2024_05.base.rsData.RsData;
-import com.koreait.rest_2024_05.member.entity.Member;
-import com.koreait.rest_2024_05.member.service.MemberService;
+import com.koreait.rest_2024_05.boundedContext.member.entity.Member;
+import com.koreait.rest_2024_05.boundedContext.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -22,7 +21,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/v1/member", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-public class Api1MemberController {
+public class ApiV1MemberController {
     private final MemberService memberService;
 
     @Data

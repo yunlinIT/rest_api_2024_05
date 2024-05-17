@@ -1,15 +1,13 @@
 package com.koreait.rest_2024_05.base.security.service;
 
-import com.koreait.rest_2024_05.member.entity.Member;
-import com.koreait.rest_2024_05.member.repository.MemberRepository;
+import com.koreait.rest_2024_05.boundedContext.member.entity.Member;
+import com.koreait.rest_2024_05.boundedContext.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
